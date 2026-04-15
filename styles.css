@@ -108,7 +108,7 @@ button {
 
 .hero {
   margin-top: 18px;
-  padding: 72px 28px;
+  padding: 40px 24px;
   border-radius: calc(var(--radius-lg) + 6px);
   background:
     linear-gradient(125deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.38)),
@@ -116,6 +116,7 @@ button {
   box-shadow: var(--shadow);
   overflow: hidden;
 }
+
 
 .hero-copy {
   max-width: 520px;
