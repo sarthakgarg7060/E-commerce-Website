@@ -1,11 +1,3 @@
-import {
-  loginWithEmail,
-  loginWithGoogle,
-  logoutUser,
-  signUpWithEmail,
-  watchAuthState
-} from "./firebase.js";
-
 const products = [
   {
     id: 1,
@@ -49,25 +41,9 @@ const CART_STORAGE_KEY = "novacart-items";
 
 const productGrid = document.querySelector("#productGrid");
 const cartCount = document.querySelector(".cart-count");
-const loginButton = document.querySelector(".login-btn");
-const authForm = document.querySelector("#authForm");
-const authSection = document.querySelector(".auth-section");
-const authStatus = document.querySelector("#authStatus");
-const authMessage = document.querySelector("#authMessage");
-const emailInput = document.querySelector("#email");
-const passwordInput = document.querySelector("#password");
-const signupButton = document.querySelector("#signupBtn");
-const emailLoginButton = document.querySelector("#emailLoginBtn");
-const googleLoginButton = document.querySelector("#googleLoginBtn");
-const logoutButton = document.querySelector("#logoutBtn");
 
 function formatPrice(price) {
   return `$${price}`;
-}
-
-function showAuthMessage(message, isError) {
-  authMessage.textContent = message;
-  authMessage.style.color = isError ? "#b42318" : "#214f38";
 }
 
 function getCartItems() {
@@ -152,85 +128,6 @@ function handleProductGridClick(event) {
   addToCart(productId);
 }
 
-function getAuthFormValues() {
-  return {
-    email: emailInput.value.trim(),
-    password: passwordInput.value.trim()
-  };
-}
-
-async function handleSignup() {
-  const { email, password } = getAuthFormValues();
-
-  if (!email || !password) {
-    showAuthMessage("Please enter both email and password.", true);
-    return;
-  }
-
-  try {
-    await signUpWithEmail(email, password);
-    showAuthMessage("Account created successfully.", false);
-    authForm.reset();
-  } catch (error) {
-    showAuthMessage(error.message, true);
-  }
-}
-
-async function handleEmailLogin() {
-  const { email, password } = getAuthFormValues();
-
-  if (!email || !password) {
-    showAuthMessage("Please enter both email and password.", true);
-    return;
-  }
-
-  try {
-    await loginWithEmail(email, password);
-    showAuthMessage("Logged in successfully.", false);
-    authForm.reset();
-  } catch (error) {
-    showAuthMessage(error.message, true);
-  }
-}
-
-async function handleGoogleLogin() {
-  try {
-    await loginWithGoogle();
-    showAuthMessage("Signed in with Google.", false);
-  } catch (error) {
-    showAuthMessage(error.message, true);
-  }
-}
-
-async function handleLogout() {
-  try {
-    await logoutUser();
-    showAuthMessage("You have been logged out.", false);
-  } catch (error) {
-    showAuthMessage(error.message, true);
-  }
-}
-
-function updateAuthUI(user) {
-  if (user) {
-    const displayName = user.displayName || user.email || "User";
-    authStatus.textContent = `Logged in as ${displayName}`;
-    loginButton.textContent = "Account";
-    logoutButton.classList.remove("hidden");
-  } else {
-    authStatus.textContent = "You are not logged in.";
-    loginButton.textContent = "Login";
-    logoutButton.classList.add("hidden");
-  }
-}
-
-function scrollToAuthSection() {
-  authSection.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-}
-
 function initializeStore() {
   if (!productGrid || !cartCount) {
     return;
@@ -238,15 +135,7 @@ function initializeStore() {
 
   renderProducts();
   updateCartCount();
-
   productGrid.addEventListener("click", handleProductGridClick);
-  loginButton.addEventListener("click", scrollToAuthSection);
-  signupButton.addEventListener("click", handleSignup);
-  emailLoginButton.addEventListener("click", handleEmailLogin);
-  googleLoginButton.addEventListener("click", handleGoogleLogin);
-  logoutButton.addEventListener("click", handleLogout);
-
-  watchAuthState(updateAuthUI);
 }
 
 initializeStore();
