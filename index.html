@@ -10,7 +10,27 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  
+  <header class="hero-shell">
+    <nav class="navbar">
+      <div class="logo">NovaCart</div>
+      <div class="nav-actions">
+        <button class="login-btn" type="button">Login</button>
+        <button class="cart-btn" type="button" aria-label="Shopping cart">
+          <span class="cart-icon">&#128722;</span>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Fresh arrivals for everyday living</p>
+        <h1>Simple shopping, thoughtfully designed.</h1>
+        <p class="hero-text">
+          Browse a clean collection of modern essentials with a smooth, beginner-friendly frontend setup.
+        </p>
+      </div>
+    </section>
   </header>
 
   <main class="page-content">
@@ -24,7 +44,7 @@
         <div class="auth-copy">
           <h3>Welcome back to NovaCart</h3>
           <p>
-            Use email/password or continue with Google. This setup is frontend-only and designed to plug into Firebase Authentication.
+            Use email/password or continue with Google. This setup is simple, beginner-friendly, and works with Firebase Authentication.
           </p>
           <div class="auth-status" id="authStatus">You are not logged in.</div>
         </div>
@@ -43,6 +63,7 @@
 
           <button class="auth-btn google-btn" id="googleLoginBtn" type="button">Continue with Google</button>
           <button class="auth-btn secondary-btn hidden" id="logoutBtn" type="button">Logout</button>
+
           <p class="auth-message" id="authMessage"></p>
         </form>
       </div>
@@ -51,10 +72,12 @@
     <section class="products-section">
       <div class="section-heading">
         <p class="section-label">Featured products</p>
+        <h2>Top picks for your next upgrade</h2>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
     </section>
   </main>
-
-  <script type="module" src="script.js"></script>
 
   <script type="module" src="script.js"></script>
 </body>
