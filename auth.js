@@ -7,6 +7,7 @@ import {
 } from "./firebase.js";
 
 const authForm = document.querySelector("#authForm");
+const authCard = document.querySelector("#authCard");
 const authStatus = document.querySelector("#authStatus");
 const authMessage = document.querySelector("#authMessage");
 const emailInput = document.querySelector("#email");
@@ -16,7 +17,7 @@ const emailLoginButton = document.querySelector("#emailLoginBtn");
 const googleLoginButton = document.querySelector("#googleLoginBtn");
 const logoutButton = document.querySelector("#logoutBtn");
 
-function showAuthMessage(message, isError) {
+function showAuthMessage(message, isError = false) {
   authMessage.textContent = message;
   authMessage.style.color = isError ? "#b42318" : "#214f38";
 }
@@ -26,6 +27,21 @@ function getAuthFormValues() {
     email: emailInput.value.trim(),
     password: passwordInput.value.trim()
   };
+}
+
+function playSuccessAnimation() {
+  authCard.style.transform = "scale(1.02)";
+  authCard.style.boxShadow = "0 24px 60px rgba(47, 111, 79, 0.22)";
+
+  setTimeout(() => {
+    authCard.style.transform = "scale(1)";
+  }, 220);
+}
+
+function redirectToHome() {
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 800);
 }
 
 async function handleSignup() {
@@ -38,8 +54,10 @@ async function handleSignup() {
 
   try {
     await signUpWithEmail(email, password);
-    showAuthMessage("Account created successfully.", false);
+    playSuccessAnimation();
+    showAuthMessage("Account created successfully. Redirecting...", false);
     authForm.reset();
+    redirectToHome();
   } catch (error) {
     showAuthMessage(error.message, true);
   }
@@ -55,8 +73,10 @@ async function handleEmailLogin() {
 
   try {
     await loginWithEmail(email, password);
-    showAuthMessage("Logged in successfully.", false);
+    playSuccessAnimation();
+    showAuthMessage("Logged in successfully. Redirecting...", false);
     authForm.reset();
+    redirectToHome();
   } catch (error) {
     showAuthMessage(error.message, true);
   }
@@ -65,7 +85,9 @@ async function handleEmailLogin() {
 async function handleGoogleLogin() {
   try {
     await loginWithGoogle();
-    showAuthMessage("Signed in with Google.", false);
+    playSuccessAnimation();
+    showAuthMessage("Signed in with Google. Redirecting...", false);
+    redirectToHome();
   } catch (error) {
     showAuthMessage(error.message, true);
   }
@@ -92,16 +114,19 @@ function updateAuthUI(user) {
 }
 
 function initializeAuthPage() {
-  if (!signupButton) {
-    return;
-  }
-
   signupButton.addEventListener("click", handleSignup);
   emailLoginButton.addEventListener("click", handleEmailLogin);
   googleLoginButton.addEventListener("click", handleGoogleLogin);
   logoutButton.addEventListener("click", handleLogout);
 
-  watchAuthState(updateAuthUI);
+  watchAuthState((user) => {
+    updateAuthUI(user);
+
+    if (user) {
+      showAuthMessage("Session found. Redirecting...", false);
+      redirectToHome();
+    }
+  });
 }
 
 initializeAuthPage();
