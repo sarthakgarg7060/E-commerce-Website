@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - NovaCart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero-shell">
+    <nav class="navbar">
+      <div class="logo">NovaCart</div>
+      <div class="nav-actions">
+        <a class="login-btn link-btn" href="index.html">Home</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-content auth-page">
+    <section class="auth-section">
+      <div class="section-heading">
+        <p class="section-label">Account access</p>
+        <h2>Login or create your account</h2>
+      </div>
+
+      <div class="auth-card">
+        <div class="auth-copy">
+          <h3>Welcome back to NovaCart</h3>
+          <p>
+            Use email/password or continue with Google. This setup is simple, beginner-friendly, and works with Firebase Authentication.
+          </p>
+          <div class="auth-status" id="authStatus">You are not logged in.</div>
+        </div>
+
+        <form class="auth-form" id="authForm">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Enter password" required>
+
+          <div class="auth-actions">
+            <button class="auth-btn primary-btn" id="signupBtn" type="button">Sign Up</button>
+            <button class="auth-btn secondary-btn" id="emailLoginBtn" type="button">Login</button>
+          </div>
+
+          <button class="auth-btn google-btn" id="googleLoginBtn" type="button">Continue with Google</button>
+          <button class="auth-btn secondary-btn hidden" id="logoutBtn" type="button">Logout</button>
+
+          <p class="auth-message" id="authMessage"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>
