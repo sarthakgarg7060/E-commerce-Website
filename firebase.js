@@ -10,12 +10,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAROM1lMt_-VZSikZDNtl29xrAzbLwywgQ",
+  authDomain: "e--commerce-website-9b2fc.firebaseapp.com",
+  projectId: "e--commerce-website-9b2fc",
+  storageBucket: "e--commerce-website-9b2fc.firebasestorage.app",
+  messagingSenderId: "309334590038",
+  appId: "1:309334590038:web:22225776cf447d1c5571f7"
 };
 
 const app = initializeApp(firebaseConfig);
