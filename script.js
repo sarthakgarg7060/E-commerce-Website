@@ -1,3 +1,5 @@
+import { logoutUser, watchAuthState } from "./firebase.js";
+
 const products = [
   {
     id: 1,
@@ -41,6 +43,7 @@ const CART_STORAGE_KEY = "novacart-items";
 
 const productGrid = document.querySelector("#productGrid");
 const cartCount = document.querySelector(".cart-count");
+const logoutButton = document.querySelector("#logoutBtn");
 
 function formatPrice(price) {
   return `$${price}`;
@@ -128,14 +131,23 @@ function handleProductGridClick(event) {
   addToCart(productId);
 }
 
-function initializeStore() {
-  if (!productGrid || !cartCount) {
-    return;
-  }
+async function handleLogout() {
+  await logoutUser();
+  window.location.href = "login.html";
+}
 
+function initializeStore() {
   renderProducts();
   updateCartCount();
   productGrid.addEventListener("click", handleProductGridClick);
+  logoutButton.addEventListener("click", handleLogout);
 }
 
-initializeStore();
+watchAuthState((user) => {
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  initializeStore();
+});
