@@ -14,7 +14,7 @@
     <nav class="navbar">
       <div class="logo">NovaCart</div>
       <div class="nav-actions">
-        <button class="login-btn" type="button">Login</button>
+        <a class="login-btn link-btn" href="login.html">Login</a>
         <button class="cart-btn" type="button" aria-label="Shopping cart">
           <span class="cart-icon">&#128722;</span>
           <span class="cart-count">0</span>
@@ -34,41 +34,6 @@
   </header>
 
   <main class="page-content">
-    <section class="auth-section">
-      <div class="section-heading">
-        <p class="section-label">Account access</p>
-        <h2>Login or create your account</h2>
-      </div>
-
-      <div class="auth-card">
-        <div class="auth-copy">
-          <h3>Welcome back to NovaCart</h3>
-          <p>
-            Use email/password or continue with Google. This setup is simple, beginner-friendly, and works with Firebase Authentication.
-          </p>
-          <div class="auth-status" id="authStatus">You are not logged in.</div>
-        </div>
-
-        <form class="auth-form" id="authForm">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
-
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="Enter password" required>
-
-          <div class="auth-actions">
-            <button class="auth-btn primary-btn" id="signupBtn" type="button">Sign Up</button>
-            <button class="auth-btn secondary-btn" id="emailLoginBtn" type="button">Login</button>
-          </div>
-
-          <button class="auth-btn google-btn" id="googleLoginBtn" type="button">Continue with Google</button>
-          <button class="auth-btn secondary-btn hidden" id="logoutBtn" type="button">Logout</button>
-
-          <p class="auth-message" id="authMessage"></p>
-        </form>
-      </div>
-    </section>
-
     <section class="products-section">
       <div class="section-heading">
         <p class="section-label">Featured products</p>
@@ -79,6 +44,6 @@
     </section>
   </main>
 
-  <script type="module" src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
